@@ -1,16 +1,39 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const navigate = useNavigate();
 
-    const handleBackClick = () => {
-        navigate('/');
+    const[email, setEmail] = useState('')
+    const[password, setPassword] = useState('')
+
+    // const navigate = useNavigate();
+    // const handleBackClick = () => {navigate('/');};
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log(email,password);
     };
+
     return (
-        <div className="login">
-            <h1>Login</h1>
-            <button onClick={handleBackClick}>home</button>
-        </div>
+        <form action="login" onSubmit={handleSubmit}>
+            <h3>Log in</h3>
+
+            <label>Email:</label>
+            <input 
+                type="email"
+                onChange={(e)=>setEmail(e.target.value)}
+                value={email}
+            />
+
+            <label>Password:</label>
+            <input 
+                type="password"
+                onChange={(e)=>setPassword(e.target.value)}
+                value={password}
+            />
+
+            <button>Login</button>
+        </form>
     )
 }
 
