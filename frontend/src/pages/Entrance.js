@@ -1,20 +1,18 @@
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
+import { useAuthContext } from "../hooks/useAuthContext"
+
 
 const Entrance = () => {
-    const navigate = useNavigate();
+    const {user} = useAuthContext()
 
-    const handleLoginClick = () => {
-        navigate('/login');
-    };
-
-    const handleRegisterClick = () => {
-        navigate('/register');
-    };
     return (
-        <div className="entrance">
-            <h1>Welcome</h1>
-            <button onClick={handleLoginClick}>Login</button>
-            <button onClick={handleRegisterClick}>Register</button>
+        <div>
+            <div className="entrance">
+                <h1>This is the home page! Welcome, {user.username}</h1>
+            </div>
+            <Link to="/room-creation">
+                <h3>Create a room</h3>
+            </Link>
         </div>
     )
 }

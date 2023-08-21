@@ -7,6 +7,8 @@ import Entrance from './pages/Entrance'
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Navbar from './components/Navbar'
+import UserProfile from './pages/UserProfile';
+import RoomCreation from './pages/RoomCreation';
 
 function App() {
 
@@ -29,6 +31,14 @@ function App() {
             <Route 
               path="/register" 
               element={!user ? <Register /> : <Navigate to="/"/>} 
+            />
+            <Route
+              path="/user-profile/:username"
+              element={user ? <UserProfile /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/room-creation"
+              element={user ? <RoomCreation /> : <Navigate to="/login" />}
             />
           </Routes>
         </div>

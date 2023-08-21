@@ -56,17 +56,25 @@ userSchema.statics.register = async function(username, email, password) {
 }
 
 //static login method
-userSchema.statics.login = async function(email,password) {
+userSchema.statics.login = async function(usernameOrEmail, password) {
   
   // validation
-  if(!email || !password){
+  if(!usernameOrEmail  || !password){
     throw Error('All fields must be filled')
   }
 
-  const user = await this.findOne({email})
+  // Check if the input is an email
+  const isEmail = validator.isEmail(usernameOrEmail);
+  let user
+  if (isEmail) {
+    user = await this.findOne({ email: usernameOrEmail });
+  } else {
+    user = await this.findOne({ username: usernameOrEmail });
+  }
+
     
   if(!user){
-      throw Error('Incorrect email')
+      throw Error('Incorrect username or email')
   }
 
   const match = await bcrypt.compare(password, user.password)

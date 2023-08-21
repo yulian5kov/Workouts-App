@@ -22,6 +22,7 @@ const WorkoutForm = () => {
 
     const workout = {title, load, reps}
 
+    // look in package.json for 'proxy'
     const response = await fetch('/api/workouts', {
       method: 'POST',
       body: JSON.stringify(workout),
